@@ -1,11 +1,10 @@
-/* Phonebook.module.css */
-
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #3498db, #95a5a6); /* Ви можете налаштувати кольори градієнту */
-    color: #2c3e50; /* Змінено колір тексту для кращої видимості на фоні */
+    background: linear-gradient(135deg, #3498db, #85bdc1);
+    color: #2c3e50; 
+    height: 100%;
   }
   
   .container {
@@ -15,7 +14,12 @@ body {
     margin-top: 30px;
     flex-direction: column;
   }
-  
+  h1 {
+    margin-right: auto;
+    font-size: 56px;
+    color: #11405f;
+  }
+
   h2 {
     margin-right: auto;
     font-size: 42px;
@@ -98,3 +102,7 @@ body {
     border-bottom: none;
   }
   
+
+  .deleteButton{
+    margin-left: 20px;
+  }

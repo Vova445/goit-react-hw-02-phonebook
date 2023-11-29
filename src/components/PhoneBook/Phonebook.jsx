@@ -1,55 +1,76 @@
 import { Component } from "react";
-import {nanoid} from 'nanoid';
 import styles from './Phonebook.module.css';
+import ContactForm from "./Refactor/ContactForm";
+import Filter from "./Refactor/Filter";
+import ContactList from "./Refactor/ContactList";
+import { nanoid } from 'nanoid';
 
 class Phonebook extends Component {
-    state = {
-        contacts: [],
-        name: '',
-        number: '',
+  state = {
+    contacts: [],
+    filter: '',
+    name: '',
+    number: '',
+    showDeleted: false,
+  }
+
+  change = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
+  submit = (e) => {
+    e.preventDefault();
+    const { name, contacts } = this.state;
+    if (contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
+      alert(`${name} is already in contacts`);
+      return;
     }
+    const newContact = {
+      id: nanoid(),
+      name: this.state.name,
+      number: this.state.number,
+    };
 
-    change = (e) => {
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
-      }
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+      name: '',
+      number: '',
+    }));
+  }
 
-    submit = (e) => {
-        e.preventDefault();
-        const newContact = {
-            id: nanoid(),
-            name: this.state.name,
-            number: this.state.number,
-        }
-  
-    this.setState (prevState => ({
-        contacts: [...prevState.contacts, newContact],
-        name: '',
-        number: '',
-    }))
-}
-render () {
+  deleteContact = (id) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  }
+
+  filter = (value) => {
+    this.setState({ filter: value });
+  }
+
+  render() {
+    const { contacts, filter, showDeleted } = this.state;
+    const filteredContacts = showDeleted
+      ? contacts
+      : contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
+
     return (
-        <div className={styles.container}>
-            <form onSubmit={this.submit}>
-                <label>Name
-                <input type="text" name="name" value={this.state.name} onChange={this.change} required ></input>
-                </label>
-                <label>Number
-                    <input type="tel" name="number" value={this.state.number} onChange={this.change} required></input>
-                </label>
-                <button type="submit">
-                    Add Contact
-                </button>
-            </form>
-            <h2>Contacts</h2>
-            <ul> 
-                {this.state.contacts.map(contact =>(
-                    <li key={contact.id}>{contact.name}: {contact.number}</li>
-                ))}
-            </ul>
-        </div>
-    )
+      <div className={styles.container}>
+        <h1>Phonebook</h1>
+        <ContactForm
+          name={this.state.name}
+          number={this.state.number}
+          onChange={this.change}
+          onSubmit={this.submit}
+        />
+
+        <h2>Contacts</h2>
+        <Filter value={filter} onChange={this.filter} />
+        <ContactList contacts={filteredContacts} deleteContact={this.deleteContact} />
+      </div>
+    );
+  }
 }
-}
+
 export default Phonebook;
