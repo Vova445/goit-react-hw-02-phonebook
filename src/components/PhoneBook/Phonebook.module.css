@@ -1,4 +1,14 @@
-.container {
+/* Phonebook.module.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #3498db, #95a5a6); /* Ви можете налаштувати кольори градієнту */
+    color: #2c3e50; /* Змінено колір тексту для кращої видимості на фоні */
+  }
+  
+  .container {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
@@ -8,8 +18,8 @@
   
   h2 {
     margin-right: auto;
-    font-size: 24px;
-    color: #3498db;
+    font-size: 42px;
+    color: #11405f;
   }
   
   form {
@@ -17,9 +27,9 @@
     flex-direction: column;
     margin-top: 20px;
     border: 2px solid #3498db;
-    padding: 60px; 
+    padding: 60px;
     border-radius: 15px;
-    background-color: #2c3e50;
+    background-color: rgba(44, 62, 80, 0.8); 
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     transition: box-shadow 0.3s ease-in-out;
   }
@@ -37,10 +47,10 @@
   }
   
   input {
-    padding: 16px; 
-    margin-bottom: 24px; 
-    font-size: 18px; 
-    color: #34495e;
+    padding: 16px;
+    margin-bottom: 24px;
+    font-size: 18px;
+    color: #2c3e50; 
     background-color: #ecf0f1;
     border: 1px solid #3498db;
     border-radius: 5px;
@@ -53,7 +63,7 @@
   }
   
   button {
-    padding: 16px; 
+    padding: 16px;
     font-size: 18px;
     background-color: #3498db;
     color: #fff;
@@ -68,13 +78,13 @@
   }
   
   ul {
-    list-style: none;
+    list-style: square;
     padding: 0;
   }
   
   li {
     margin-bottom: 12px;
-    font-size: 18px;
+    font-size: 24px;
     border-bottom: 1px solid #bdc3c7;
     padding-bottom: 8px;
     transition: background-color 0.3s ease-in-out;
